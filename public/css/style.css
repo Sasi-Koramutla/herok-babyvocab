@@ -27,7 +27,7 @@ body{
   height: 50px;
 }
 
-#add-word, #add-word-page{
+#add-word, #add-word-page, #update-word{
     background-color: #ec8b68;
     color: #fff;
   border-radius: 10px;
@@ -61,10 +61,20 @@ body{
 
 .add-word-div{
     display:flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    border:none;
 }
 
 .btn{
     margin:0px 12px 0px 12px;
 }
+
+.word-actions{
+  border:none;
+  background-color: white;
+}
+/* .nav-item-word{
+  margin: 3px 3px 3px 0px;
+} */

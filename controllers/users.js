@@ -3,6 +3,7 @@ const usersRouter = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/users.js");
 const Word = require("../models/words.js");
+const AllWords = require("../models/words.js");
 const allUsers = require('../models/users');
 const methodOverride = require('method-override');
 
@@ -63,10 +64,10 @@ usersRouter.get("/:id", isAuthenticated, (req, res) => {
 });
 
 // edit
-usersRouter.get('/:id/edit', isAuthenticated, (req, res)=>{
-    User.findById(req.params.id, (err, foundUser)=>{ 
-        res.render('edit.ejs', {
-          user: foundUser, 
+usersRouter.get('/words/:id/edit', isAuthenticated, (req, res)=>{
+    Word.findById(req.params.id, (err, foundWord)=>{ 
+        res.render('words/edit.ejs', {
+          word: foundWord, 
           currentUser: req.session.currentUser
         });
     });
@@ -93,12 +94,12 @@ usersRouter.get('/', isAuthenticated, (req, res)=>{
 });
 
 // update
-usersRouter.put('/:id', isAuthenticated, (req, res)=>{
-    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedModel)=> {
-        allUsers.find({},(err , users) =>{
-            res.render("index.ejs",{currentUser: updatedModel,
-                users:users});
-        });
+usersRouter.put('/words/:id', isAuthenticated, (req, res)=>{
+    Word.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedModel)=> {
+/*         AllWords.find({},(err , words) =>{
+            res.render("index.ejs",{currentUser: req.session.currentUser,
+                words:words});
+        }); */    res.redirect(`/users/`);
     });
 });
 
@@ -134,9 +135,9 @@ usersRouter.delete('/:id/', isAuthenticated, (req, res) => {
 });
 
 //delete messages
-usersRouter.delete('/messages/:id/:to', isAuthenticated, (req, res) => {
-  Message.findByIdAndRemove(req.params.id, { useFindAndModify: false }, (err, data)=>{
-    res.redirect(`/users/${req.params.to}`);
+usersRouter.delete('/words/:id/', isAuthenticated, (req, res) => {
+  Word.findByIdAndRemove(req.params.id, { useFindAndModify: false }, (err, data)=>{
+    res.redirect(`/users`);
   });
 });
 

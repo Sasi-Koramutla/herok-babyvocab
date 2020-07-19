@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>YouConnect </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0">
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
+          <div><h2 style="color:white;">
+            <%= currentUser.babyName %>'s Vocabulary
+           </h2>
+          </div>
+          <ul class="nav nav-tabs add-word-div">
+               <li class="nav-item-word">
+                <a href="/users" class="btn btn-light" > Home </a>
+               </li> 
+             
+                <li class="nav-item-word">
+                    <button type="button" class="btn btn-danger" id="myBtn">Delete Word</button> 
+                </li>
+                <li class="nav-item-word">
+                    <form action="/sessions?_method=DELETE" method="POST">
+                        <input type="submit" value="Log Out" class="btn btn-light" />
+                      </form>
+                </li>
+          </div>
+        </div>
+      </nav>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Word?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-footer">
+                <form action="/users/words/<%=word.id%>?_method=DELETE" method="POST">
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
+                
+            </div>
+            </div>
+            
+        </div>
+        </div>
+
+    <div class="container">
+        <h2 style="width:50%; margin-left:25%">Update Word</h2>
+      <form action="/users/words/<%=word.id%>?_method=PUT" method="POST" style="width:75%; margin-left:25%">
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                Word
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                    <input class="form-control" type="text" name="word" value="<%=word.word%>"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                Tags
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                    <input class="form-control" type="text" value="<%=word.tags%>" name="tags">
+            </div>
+        </div>
+        <div class=" form-group row">
+            <div class="col-sm-2" style="display:flex; justify-content: flex-end; align-items: center;">
+              </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                <input id="update-word" class="btn" type="submit" value="Update"/>
+              </div>
+        </div>
+  
+      </form>
+    </div>
+    <script>
+        $(() =>{
+            $("#myBtn").click(function(){
+            $("#myModal").modal("show");
+        });
+        });
+    </script>
+
+    </body>
+</html>
+
