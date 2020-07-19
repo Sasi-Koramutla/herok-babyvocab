@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>YouConnect </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+ <!--    <link rel="stylesheet" href="/css/style.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+   <div class= "jumbotron"> 
+    <h1>Sign Up</h1>
+   </div> 
+    <form action="/users" method="POST" style="width:50%; margin-left:25%">
+        <div class="form-group">
+            <input type="text" placeholder="First name" name="firstName">
+        </div>
+        <div class="form-group">
+            <input type="text"  placeholder="Last name" name="lastName">
+        </div>
+        <div class="form-group">
+             <input type="text" name="username" placeholder="email (Username)"/><br/>
+        </div>
+        <div class="form-group"> 
+            <input type="password" name="password" placeholder="Password"/><br/>
+        </div>
+        <div class="form-group">
+            <input type="text" name="babyName" placeholder="Baby Name"/><br/>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Sign up"/>
+        </div>
+  
+    </form>
+</body>
+</html>

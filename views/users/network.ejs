@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>YouConnect </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <!--  <link rel="stylesheet" href="/css/style.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="position:sticky; top:0">
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div><h2 style="color:white;">
+          Howdy <%= currentUser.firstName %>, 
+           <%= currentUser.lastName %>!
+         </h2>
+        </div>
+        <div>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active mr-sm-2">
+                <a href="/users" class="btn btn-light" > Home </a>
+            </li>
+            <li class="nav-item">
+              <form action="/sessions?_method=DELETE" method="POST">
+                <input type="submit" value="Log Out" class="btn btn-light" />
+              </form>
+            </li>
+          </ul>
+        </div>
+        
+<!--         <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Connection Name" aria-label="Search">
+          <button class="btn btn-light" type="submit">Find</button>
+        </form> -->
+      </div>
+    </nav>
+    <div class="jumbotron" style="align-items:center; position:sticky; top:60px">
+     <div style="text-align:center;">
+      <div class="input-group mb-3" style="width:50%; margin-left:25%; border: 1px solid black; border-radius:25px;">
+        <span style="margin:10px"> <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+           <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+           <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+         </svg></span>
+         <input  style="width:90%; background-color: #e9ecef; border:none;" type="text" id="searchInput" onkeyup="search()" placeholder="Search for connection names.." title="Type in a name">  
+       </div>
+     </div> 
+  </div>
+  <div style="margin:0% 10% 0px 10%; display:flex; flex-wrap: wrap; flex-direction: row; justify-content: center; align-items:baseline;width:80%">
+
+    <table id="connections" style="width:90%;">
+    <thead><th></th></thead>
+  <% for (let i = 0; i < users.length; i++) { %>
+      <% if (currentUser.userConnections.map((e) => {return e.connectionId}).indexOf(users[i].id) > -1) { %>
+      <tr style="border-top: 1px solid grey; width:90%; ">
+    <td style="width:100%; margin:5px;  display:flex; flex-direction: row; justify-content: center; align-items:center">      
+      <img class="img img-fluid" style="width:100px; height:100px; border-radius:50px; margin-top:10px" src="<%= users[i].img %>" onerror=this.src="https://www.materialui.co/materialIcons/social/person_grey_192x192.png">
+         <div>  <%= users[i].firstName %> | </div>
+          <div style="margin-left:5px"> <%= users[i].lastName %>  </div>
+        <div style="margin-left:5px"> 
+              <a href="/users/<%= users[i].id %>"> 
+                <%= users[i].username %> 
+              </a>
+        </div>
+        <div style="margin-left:10px">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Message</button>
+        </div>
+        </td>
+      </tr>
+        <% } %>
+
+    <% } %>
+  </table>
+  </div>
+  <script>
+    //display toggle based on search input
+    function search() {
+      var filter = document.getElementById("searchInput").value.toUpperCase();
+      var table = document.getElementById("connections");
+      var tr = table.getElementsByTagName("tr");
+      for (let i = 0; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+         let txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else 
+          {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
+ </body>
+</html>
+
+

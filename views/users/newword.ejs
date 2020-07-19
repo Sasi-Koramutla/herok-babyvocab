@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>YouConnect </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0">
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div><h2 style="color:white;">
+          Howdy <%= user.firstName %>!
+         </h2>
+        </div>
+        <div class="add-word-div">
+
+              <a href="/users" class="btn btn-light" > Home </a>
+
+              <form action="/sessions?_method=DELETE" method="POST">
+                <input type="submit" value="Log Out" class="btn btn-light" />
+              </form>
+        </div>
+      </div>
+    </nav>
+  
+ <div class="container">
+  <form class= "add-word" action="/users/words/<%= user.babyName %>/<%= user.id %>" method="POST" style="width:50%; margin-left:25%">
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Word" name="word">
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tags" name= "tags" rows="1"></textarea>
+    </div>
+    <div class="form-group">
+        <input id="add-word-page" style="width:50%;margin-left:25%" class="form-control btn btn-primary" type="submit" value="Add"/>
+    </div>
+  </form>
+</div>
+ </body>
+</html>

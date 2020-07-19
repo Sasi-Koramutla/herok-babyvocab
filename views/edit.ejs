@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>YouConnect </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<!--     <link rel="stylesheet" href="/css/style.css"> -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="position:sticky; top:0">
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
+          <div><h2 style="color:white;">
+            Howdy <%= currentUser.firstName %>!
+           </h2>
+          </div>
+          <div>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active mr-sm-2">
+                <a href="/users" class="btn btn-light" > Home </a>
+              </li>
+              <li class="nav-item active mr-sm-2">
+                <button type="button" class="btn btn-danger" id="myBtn">Delete Profile</button> 
+              </li>
+              <li class="nav-item">
+                <form action="/sessions?_method=DELETE" method="POST">
+                  <input type="submit" value="Log Out" class="btn btn-light" />
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Profile?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-footer">
+                <form action="/users/<%=user.id%>?_method=DELETE" method="POST">
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
+                
+            </div>
+            </div>
+            
+        </div>
+        </div>
+    <div class="jumbotron" style="align-items:center;">
+     <div class="row" style="text-align:center; margin-left:25%">
+        <div>
+            <svg width="100px" height="100px" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.995-.944v-.002.002zM7.022 13h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zm7.973.056v-.002.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
+            </svg>
+          </div>
+    
+         <div class="row" style="text-align:center; margin-left:2%">  
+         </div>
+        <h1 style="font-size:60px;">Update Profile</h1>
+     </div>
+    </div>
+
+    <div>
+      <form action="/users/<%=user.id%>?_method=PUT" method="POST" style="width:50%; margin-left:25%">
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                Username
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                <fieldset disabled>
+                    <input class="form-control" type="text" name="username" value="<%=user.username%>"/>
+                 </fieldset>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                Password
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                <fieldset disabled>
+                    <input class="form-control" type="password" name="password" placeholder="..........."/>
+                </fieldset>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                First name
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                    <input class="form-control" type="text" value="<%=user.firstName%>" name="firstName">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                Last name
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                <input class="form-control" type="text"  value="<%=user.lastName%>" name="lastName">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                Image link
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+               <input class="form-control" type="text" name="img" value="<%=user.img%>"/>
+            </div>            
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                Zip
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                <input class="form-control" type="number" name="zipcode" value="<%=user.zip%>"/>
+            </div>    
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+              Birthday
+            </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-start;">
+                <select class="form-control" name="bmonth" id="month" value="<%=user.bmonth%>">
+                    <option value="0">Month</option><option value="Jan">Jan</option><option value="Feb">Feb</option><option value="Mar">Mar</option><option value="Apr">Apr</option><option value="May">May</option><option value="Jun">Jun</option><option value="Jul">Jul</option><option value="Aug">Aug</option><option value="Sep">Sep</option><option value="Oct">Oct</option><option value="Nov">Nov</option><option value="Dec">Dec</option>
+                </select>
+                <select class="form-control" name="bday" id="day" value="<%=user.bday%>">
+                    <option value="0">Day</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+                </select>
+            </div>    
+        </div>
+        <div class=" form-group row">
+            <div class="col-sm-2" style="display:flex; justify-content: flex-end; align-items: center;">
+              </div>
+            <div class="col-sm-3" style="display:flex; justify-content: flex-end; align-items: center;">
+                <input class="btn btn-primary" type="submit" value="Update"/>
+              </div>
+
+        </div>
+  
+      </form>
+    </div>
+    <script>
+        $(() =>{
+            $("#myBtn").click(function(){
+            $("#myModal").modal("show");
+        });
+        });
+    </script>
+
+    </body>
+</html>
+

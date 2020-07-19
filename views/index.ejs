@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Baby Vocabulary </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky; top:0">
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div><h2 style="color:white;">
+          <%= currentUser.babyName %>'s Vocabulary!
+         </h2>
+        </div>
+        <div class="add-word-div">
+          <a href="/users/<%=currentUser.id%>/new"><button id="add-word">Add New Word</button></a>
+          <ul class="navbar-nav index-nav">
+  
+            <li class="nav-item active mr-sm-2">
+<!--               <a href="/users/<%= currentUser.id %>/edit" class="btn btn-light" >Edit Profile  </a> -->
+
+            </li>
+            <li class="nav-item">
+              <form action="/sessions?_method=DELETE" method="POST">
+                <input type="submit" value="Log Out" class="btn btn-light" />
+              </form>
+            </li>
+          </ul>
+        </div>
+        
+<!--         <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Connection Name" aria-label="Search">
+          <button class="btn btn-light" type="submit">Find</button>
+        </form> -->
+
+      </div>
+    </nav>
+  </div>
+  <div style=" padding:20px 50px 0px 50px; width:80%">
+    <div class="input-group mb-2" style="width:50%; margin-left:25%">
+      <input  class="form-control" style="width:90%; background-color: white; border-radius:25px;" type="text" id="searchInput" onkeyup="search()" placeholder="Search for existing vocabulary.." title="Type in a name"> 
+    </div>
+    <button id="sort-table" onclick="sortTable()">Sort</button>
+    <table class="table table-hover" id="words" style="width:100%;">
+      <thead> <th> Word</th> 
+               <th> Tags </th>
+      </thead>
+      <% for (let i =0; i < words.length; i++) {%>
+         <tr>
+           <td>
+           <h3><%= words[i].word%></h3> 
+           </td>
+           <td>
+            <%= words[i].tags%>
+           </td>
+         </tr>
+      <%}%>
+  </table>
+  </div>
+  <script>
+    //display toggle based on search input
+    function search() {
+      var filter = document.getElementById("searchInput").value.toUpperCase();
+      var table = document.getElementById("words");
+      var tr = table.getElementsByTagName("tr");
+      for (let i = 0; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+         let txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else 
+          {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("words");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+    </script>
+ </body>
+</html>
+
+

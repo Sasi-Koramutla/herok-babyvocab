@@ -1,0 +1,70 @@
+body{
+    background-color: white;
+}
+
+.login-div{
+    max-width: 480px;
+    margin: 20px auto 20px auto;
+    background-color: #403c3b;
+    position: relative;
+    text-align: center;
+}
+
+.login-form, .add-word{
+    padding: 20px;
+}
+
+#login-btn{
+    background-color: #ec8b68;
+    color: #fff;
+  border-top: 1px solid #fe9772;
+  border-bottom: 1px solid #9f593f;
+  font-size: 24px;
+  letter-spacing: .05em;
+  list-style-type: none;
+  text-shadow: 2px 2px 1px #9f593f;
+  text-align: left;
+  height: 50px;
+}
+
+#add-word, #add-word-page{
+    background-color: #ec8b68;
+    color: #fff;
+  border-radius: 10px;
+  font-size: 12px;
+  letter-spacing: .05em;
+  list-style-type: none;
+/*   text-shadow: 2px 2px 1px #9f593f; */
+  text-align: center;
+  height: 40px;
+  margin-right: 12px;
+}
+
+#add-word:hover{
+    background-color: green;
+    border: none;
+}
+
+#sort-table{
+    background-color: #ec8b68;
+    color: #fff;
+  border-radius: 10px;
+  font-size: 12px;
+  letter-spacing: .05em;
+  list-style-type: none;
+/*   text-shadow: 2px 2px 1px #9f593f; */
+  text-align: center;
+  height: 25px;
+  margin-right:90%;
+  margin-bottom: 10px;
+}
+
+.add-word-div{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn{
+    margin:0px 12px 0px 12px;
+}
